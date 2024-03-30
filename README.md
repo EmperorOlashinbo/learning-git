@@ -12,8 +12,9 @@ You'll need Python 3.6 or newer to play our game.
 .   Set Up
 First, clone our project repository:
 
-git clone https://github.com/EmperorOlashinbo/pig-dice-game.git
-cd pig-dice-game
+git clone https://github.com/EmperorOlashinbo/learning-git.git
+cd learning-git
+python dice_game1.py
 
 Then, create and activate a virtual environment:
 
@@ -68,6 +69,7 @@ make uml
 Graphviz needs to be set up for generating UML diagrams.
 
 🐍 About the project
+
 📝 The assignment
 This is assignment 2 of Methods for Sustainable Programming course code DA115B VT24.
 - This project was created and maintained by Ibrahim Olasunbo Ogunbanjo, MD Abu Taher and Shadman Intishar.

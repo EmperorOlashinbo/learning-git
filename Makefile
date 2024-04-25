@@ -12,7 +12,7 @@ SPHINX_BUILD = $(VENV)/Scripts/sphinx-build
 PYREVERSE = $(VENV)/Scripts/pyreverse
 
 # Default target
-all: install lint format test coverage doc uml
+all: install lint black test coverage doc uml
 
 # Install dependencies
 install:
@@ -22,18 +22,18 @@ install:
 # Run flake8
 flake8:
 	@echo "Linting code with Flake8..."
-	$(FLAKE8) dice_game1.py test_dice.py
+	$(FLAKE8) 
 
 # Run pylint
 pylint:
 	@echo "Linting code with Pylint..."
-	$(PYLINT) dice_game1.py test_dice.py
+	$(PYLINT) 
 
 # Run linters
 lint:
 	@echo "Running linters..."
-	$(FLAKE8) dice_game1.py test_dice.py
-	$(PYLINT) dice_game1.py test_dice.py
+	$(FLAKE8) 
+	$(PYLINT) 
 
 # Format code with Black
 black:
@@ -48,17 +48,23 @@ test:
 # Generate coverage report
 coverage:
 	@echo "Generating coverage report..."
-	$(PYTEST) --cov-report term --cov=dice_game1.py test_dice.py
+	$(PYTEST) --cov-report term --cov=Dice.py Game1.py HighScores.py Intelligence.py Histogram.py 
+	DiceHand.py Player.py TestGame.py TestHighScores.py Player.py TestGame.py TestIntelligence.py 
+	TestHistogram.py TestDiceHand.py TestPlayer.py TestDice.py
 
 # Generate documentation
-doc:
+doc: pdoc pyreverse
 	@echo "Generating documentation..."
-	$(SPHINX_BUILD) -b html doc/source doc/build
+	$(SPHINX_BUILD) -b html doc/source doc/build Dice.py Game1.py HighScores.py Intelligence.py 
+	Histogram.py DiceHand.py Player.py TestGame.py TestHighScores.py Player.py TestGame.py 
+	TestIntelligence.py TestHistogram.py TestDiceHand.py TestPlayer.py TestDice.py
 
 # Generate UML diagrams
 uml:
 	@echo "Generating UML diagrams..."
-	$(PYREVERSE) -o png -p DiceGame dice_game1.py
+	$(PYREVERSE) -o png -p DiceGame Dice.py Game1.py HighScores.py Intelligence.py Histogram.py 
+	DiceHand.py Player.py TestGame.py TestHighScores.py Player.py TestGame.py TestIntelligence.py 
+	TestHistogram.py TestDiceHand.py TestPlayer.py TestDice.py
 	mv *.png doc/uml/
 
 # Clean up
@@ -69,5 +75,33 @@ clean:
 	rm -rf .pytest_cache
 	rm -rf doc/build
 	rm -rf doc/uml/*.png
+
+# Calculate software metrics for your project.
+
+radon-cc:
+	@$(call MESSAGE,$@)
+	radon cc --show-complexity --average pig
+
+radon-mi:
+	@$(call MESSAGE,$@)
+	radon mi --show pig
+
+radon-raw:
+	@$(call MESSAGE,$@)
+	radon raw pig
+
+radon-hal:
+	@$(call MESSAGE,$@)
+	radon hal pig
+
+cohesion:
+	@$(call MESSAGE,$@)
+	cohesion --directory pig
+
+metrics: radon-cc radon-mi radon-raw radon-hal cohesion
+
+bandit:
+	@$(call MESSAGE,$@)
+	bandit --recursive pig
 
 .PHONY: all install lint black test coverage doc uml clean flake8 pylint

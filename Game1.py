@@ -1,89 +1,13 @@
-import random
-import json
-import os
-
-
-class Dice:
-    def roll(self):
-        return random.randint(1, 6)
-
-
-class Player:
-    def __init__(self, name):
-        self.name = name
-        self.score = 0
-
-    def update_score(self, points):
-        self.score += points
-
-    def reset_score(self):
-        self.score = 0
-
-
-class DiceHand:
-    def __init__(self):
-        self.rolls = []
-
-    def add_roll(self, roll):
-        self.rolls.append(roll)
-
-    def total(self):
-        return sum(self.rolls)
-
-    def reset(self):
-        self.rolls = []
-
-
-class Histogram:
-    def __init__(self):
-        self.data = {}
-
-    def add(self, roll):
-        self.data[roll] = self.data.get(roll, 0) + 1
-
-    def display(self):
-        for roll in sorted(self.data):
-            print(f"{roll}: {'*' * self.data[roll]}")
-
-
-class Intelligence:
-    def __init__(self, level="medium"):
-        self.level = level
-
-    def should_roll_again(self, current_score, turn_score):
-        if self.level == "easy":
-            return turn_score < 15
-        elif self.level == "medium":
-            return turn_score < 20 or current_score + turn_score < 100
-        else:
-            risk_threshold = 25 if current_score + turn_score < 70 else 15
-            return turn_score < risk_threshold
-
-
-class HighScores:
-    def __init__(self, filename="highscores.json"):
-        self.filename = filename
-        self.scores = self.load_scores()
-
-    def load_scores(self):
-        if os.path.exists(self.filename):
-            with open(self.filename, "r") as file:
-                return json.load(file)
-        return {}
-
-    def save_score(self, name, score):
-        self.scores[name] = max(score, self.scores.get(name, 0))
-        with open(self.filename, "w") as file:
-            json.dump(self.scores, file)
-
-    def display(self):
-        for name, score in sorted(
-            self.scores.items(), key=lambda item: item[1], reverse=True
-        ):
-            print(f"{name}: {score}")
+from Dice import Dice
+from Player import Player
+from DiceHand import DiceHand
+from Histogram import Histogram
+from Intelligence import Intelligence
+from HighScores import HighScores
 
 
 class Game:
+
     def __init__(self):
         self.dice = Dice()
         self.players = self.setup_players()

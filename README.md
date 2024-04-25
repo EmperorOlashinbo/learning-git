@@ -12,7 +12,7 @@ Before You Begin
 
 You'll need Python 3.6 or newer to play our game.
 
-.   Set Up
+.  ⚙️ Set Up
 
 First, clone our project repository:
 
@@ -24,17 +24,17 @@ Then, create and activate a virtual environment:
 
 python -m venv venv
 
-source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+source venv/bin/activate on iOS & On Windows, use `venv\Scripts\activate`
 
 Don't forget to install the required dependencies:
 
-pip install -r requirements.txt
+pip install -r requirements.txt or make install
 
 .   Dive Into the Game 🎲
 
 Launching the game is simple:
 
-python dice_game1.py
+python Game1.py
 
 Just follow the prompts to kick things off and enjoy the game with your friends or against our AI.
 
@@ -46,14 +46,14 @@ The essence of the Pig Dice Game is risk management. Roll the dice to accumulate
 2. A two-player mode for epic face-offs.
 3. A high-score tracker to immortalize your victories.
 
-.   🎲 Game Rules
+.   📜 Game Rules
 
 The Pig Dice Game is a fun and simple dice game that can be played with one or more players. Here are the basic rules:
 
 1. Each player takes turns rolling a single six-sided die.
 2. On their turn, a player can roll the die as many times as they want, accumulating points with each roll.
 3. If a player rolls a 1, their turn ends immediately, and they lose all points accumulated during that turn.
-4. Alternatively, a player can choose to "hold," which ends their turn and adds the points accumulated during that turn to their total score.
+4. Alternatively, a player can choose to "hold," which ends their turn and adds the points accumulated during that  turn to their total score.
 5. The first player to reach or exceed 100 points wins the game.
 
 .   Behind the Scenes
@@ -96,7 +96,7 @@ This is assignment 2 of Methods for Sustainable Programming course code DA115B V
 
 1. We prioritized the requirements to meet the second deadline.
 2. We struggle for a week to be able to use the make command.
-3. We also struggle to generate pdoc and UML diagrams.
+3. We also struggled to generate PDoc and UML diagrams, but we finally made it happen.
 
 .   A Note on Licensing
 
